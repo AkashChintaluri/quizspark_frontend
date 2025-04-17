@@ -1,0 +1,1934 @@
+/* TeacherDashboard.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 50%, #9f7aea 100%);
+    min-height: 100vh;
+    line-height: 1.4;
+}
+
+.teacher-dashboard {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+}
+
+.teacher-dashboard .sidebar {
+    width: 260px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f1f5f9 100%);
+    color: #4a5568;
+    padding: 1rem;
+    flex-shrink: 0;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 0 15px 15px 0;
+    transition: width 0.3s ease;
+}
+
+.teacher-dashboard .sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #5a67d8;
+}
+
+.teacher-dashboard .sidebar nav {
+    flex-grow: 1;
+}
+
+.teacher-dashboard .sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.teacher-dashboard .sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.teacher-dashboard .sidebar nav ul li button {
+    width: calc(100% - 8px);
+    margin-right: 8px;
+    padding: 10px 12px;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    color: #4a5568;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.teacher-dashboard .sidebar nav ul li button:hover,
+.teacher-dashboard .sidebar nav ul li button.active {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.teacher-dashboard .notification-badge {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #fff;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2); }
+    50% { transform: scale(1.1); box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3); }
+    100% { transform: scale(1); box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2); }
+}
+
+.teacher-dashboard .welcome-box {
+    background: linear-gradient(90deg, #7f9cf5 0%, #a3bffa 100%);
+    color: #fff;
+    padding: 0.75rem;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(127, 156, 245, 0.3);
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.teacher-dashboard .content {
+    margin-left: 260px;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fafaff 0%, #f5f3ff 100%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    width: calc(100% - 260px);
+    border-radius: 15px 0 0 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.teacher-dashboard .content h2 {
+    margin-bottom: 15px;
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.teacher-dashboard .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.teacher-dashboard .dashboard-title {
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.teacher-dashboard .create-quiz-btn {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.teacher-dashboard .create-quiz-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+.teacher-dashboard .stats-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.teacher-dashboard .stats-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-dashboard .stat-card {
+    background: linear-gradient(135deg, #7f9cf5 0%, #667eea 50%, #5a67d8 100%);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    width: calc(33.33% - 10px);
+}
+
+.teacher-dashboard .stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.teacher-dashboard .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.teacher-dashboard .stat-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.teacher-dashboard .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.teacher-dashboard .stat-icon i {
+    font-size: 1.5rem;
+}
+
+.teacher-dashboard .quizzes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.teacher-dashboard .quiz-card {
+    background: #ffffff;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e2e8f0;
+}
+
+.teacher-dashboard .quiz-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border-color: #6366f1;
+}
+
+.teacher-dashboard .quiz-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.teacher-dashboard .quiz-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.teacher-dashboard .quiz-name {
+    color: #1e293b;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.teacher-dashboard .quiz-meta {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.teacher-dashboard .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .meta-item:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.teacher-dashboard .meta-item:last-child {
+    grid-column: 1 / -1;
+}
+
+.teacher-dashboard .meta-label {
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.teacher-dashboard .meta-value {
+    color: #334155;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.teacher-dashboard .view-details-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    color: #6366f1;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .view-details-btn:hover {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+.teacher-dashboard .search-section {
+    margin-top: 20px;
+}
+
+.teacher-dashboard .search-wrapper {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-dashboard .search-icon {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #a0aec0;
+}
+
+.teacher-dashboard .search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.teacher-dashboard .message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.teacher-dashboard .message.success {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+
+.teacher-dashboard .message.error {
+    background: #fed7d7;
+    color: #c53030;
+}
+
+.teacher-dashboard .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.teacher-dashboard .modal-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.teacher-dashboard .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.teacher-dashboard .modal-header h4 {
+    margin: 0;
+    color: #2d3748;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.teacher-dashboard .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #a0aec0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.teacher-dashboard .close-btn:hover {
+    color: #4a5568;
+}
+
+.teacher-dashboard .form-group {
+    margin-bottom: 15px;
+}
+
+.teacher-dashboard .form-group label {
+    display: block;
+    color: #4a5568;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.teacher-dashboard .quiz-name-input,
+.teacher-dashboard .due-date-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .quiz-name-input:focus,
+.teacher-dashboard .due-date-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.teacher-dashboard .edit-question-section {
+    margin-bottom: 15px;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.teacher-dashboard .options-section {
+    margin-top: 10px;
+}
+
+.teacher-dashboard .option-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.teacher-dashboard .correct-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #4a5568;
+}
+
+.teacher-dashboard .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.teacher-dashboard .save-btn {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.teacher-dashboard .cancel-btn {
+    padding: 10px 20px;
+    background: #e2e8f0;
+    color: #4a5568;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .cancel-btn:hover {
+    background: #cbd5e0;
+}
+
+.teacher-dashboard .latest-section {
+    margin: 2rem 0;
+}
+
+.teacher-dashboard .section-title {
+    color: #1e293b;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.teacher-dashboard .latest-card {
+    background: #ffffff;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e2e8f0;
+    height: auto;
+}
+
+.teacher-dashboard .latest-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border-color: #6366f1;
+}
+
+.teacher-dashboard .latest-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #6366f1 0%, #8b5cf6 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.teacher-dashboard .latest-card:hover::before {
+    opacity: 0.03;
+}
+
+.teacher-dashboard .latest-card .quiz-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.teacher-dashboard .latest-card .quiz-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.teacher-dashboard .latest-card .quiz-code {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.teacher-dashboard .latest-card .quiz-questions {
+    color: #6366f1;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.teacher-dashboard .latest-card .quiz-name {
+    color: #1e293b;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+    white-space: normal;
+    overflow: visible;
+}
+
+.teacher-dashboard .latest-card .quiz-meta {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.teacher-dashboard .latest-card .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .latest-card .meta-item:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.teacher-dashboard .latest-card .meta-item:last-child {
+    grid-column: 1 / -1;
+}
+
+.teacher-dashboard .latest-card .meta-label {
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.teacher-dashboard .latest-card .meta-value {
+    color: #334155;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.teacher-dashboard .latest-card .view-details-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    color: #6366f1;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .latest-card .view-details-btn:hover {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+/* Alternative Results Section */
+.teacher-dashboard .results-content-alt {
+    background: #f8fafc;
+    padding: 2rem;
+    min-height: calc(100vh - 60px);
+    width: 100%; /* Ensure it takes full width of the content area */
+}
+
+.teacher-dashboard .results-container-alt {
+    width: 100%; /* Changed from max-width: 900px to full width */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem; /* Added padding to maintain spacing on sides */
+}
+
+.teacher-dashboard .results-header-card-alt {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #e2e8f0;
+    width: 100%; /* Ensure it spans full width */
+}
+
+.teacher-dashboard .results-title-alt {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.teacher-dashboard .results-form-alt {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%; /* Ensure form takes full width */
+}
+
+.teacher-dashboard .quiz-code-wrapper-alt {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    width: 100%; /* Ensure input wrapper takes available space */
+}
+
+.teacher-dashboard .quiz-code-input-alt {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+}
+
+.teacher-dashboard .quiz-code-input-alt:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.teacher-dashboard .quiz-code-display-alt {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    background: #e2e8f0;
+    color: #4a5568;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.teacher-dashboard .fetch-btn-alt {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.teacher-dashboard .fetch-btn-alt:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.teacher-dashboard .results-body-alt {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%; /* Ensure body takes full width */
+}
+
+.teacher-dashboard .stats-card-alt {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    width: 100%; /* Ensure stats card spans full width */
+}
+
+.teacher-dashboard .stats-title-alt {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.teacher-dashboard .stats-grid-alt {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.teacher-dashboard .stat-item-alt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .stat-item-alt:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.teacher-dashboard .stat-icon-alt {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #667eea;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.teacher-dashboard .stat-details-alt {
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-dashboard .stat-value-alt {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+}
+
+.teacher-dashboard .stat-label-alt {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.teacher-dashboard .chart-card-alt {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    width: 100%; /* Ensure chart card spans full width */
+}
+
+.teacher-dashboard .chart-header-alt {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-dashboard .chart-title-alt {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.teacher-dashboard .chart-body-alt {
+    padding: 1.5rem;
+    height: 300px;
+    position: relative;
+}
+
+.teacher-dashboard .attempts-card-alt {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    width: 100%; /* Ensure attempts card spans full width */
+}
+
+.teacher-dashboard .attempts-header-alt {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.teacher-dashboard .attempts-title-alt {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.teacher-dashboard .export-btn-alt {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.625rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.teacher-dashboard .export-btn-alt:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.teacher-dashboard .attempts-list-alt {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.teacher-dashboard .attempt-item-alt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background 0.2s ease;
+}
+
+.teacher-dashboard .attempt-item-alt:hover {
+    background: #f8fafc;
+}
+
+.teacher-dashboard .attempt-item-alt:last-child {
+    border-bottom: none;
+}
+
+.teacher-dashboard .student-info-alt {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.teacher-dashboard .student-avatar-alt {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: 1px solid #e2e8f0;
+}
+
+.teacher-dashboard .student-details-alt {
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-dashboard .student-name-alt {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #0f172a;
+}
+
+.teacher-dashboard .attempt-date-alt {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.teacher-dashboard .score-badge-alt {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.teacher-dashboard .score-badge-alt.excellent {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.teacher-dashboard .score-badge-alt.good {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.teacher-dashboard .score-badge-alt.average {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.teacher-dashboard .score-badge-alt.poor {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Empty State */
+.teacher-dashboard .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%; /* Ensure empty state spans full width */
+}
+
+.teacher-dashboard .empty-icon {
+    font-size: 3rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.teacher-dashboard .empty-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.teacher-dashboard .empty-message {
+    font-size: 0.9375rem;
+    color: #64748b;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Alert Cards */
+.teacher-dashboard .alert-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%; /* Ensure alert card spans full width */
+}
+
+.teacher-dashboard .alert-icon {
+    font-size: 1.5rem;
+}
+
+.teacher-dashboard .alert-icon.error {
+    color: #ef4444;
+}
+
+.teacher-dashboard .alert-icon.loading {
+    color: #4f46e5;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.teacher-dashboard .alert-content {
+    flex: 1;
+}
+
+.teacher-dashboard .alert-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.375rem;
+}
+
+.teacher-dashboard .alert-message {
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Filter Section */
+.teacher-dashboard .filter-section-alt {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.teacher-dashboard .filter-section-alt label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.teacher-dashboard .filter-select-alt {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.teacher-dashboard .filter-select-alt:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Table Styles */
+.teacher-dashboard .attempts-table-alt {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.teacher-dashboard .table-header-alt, .table-row-alt {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.teacher-dashboard .table-header-alt {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #475569;
+}
+
+.teacher-dashboard .table-cell-alt {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem;
+}
+
+.teacher-dashboard .table-cell-alt:nth-child(2) {
+    justify-content: center;
+}
+
+.teacher-dashboard .table-cell-alt:nth-child(3) {
+    justify-content: flex-end;
+}
+
+.teacher-dashboard .student-info-alt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.teacher-dashboard .student-avatar-alt {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #4f46e5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.teacher-dashboard .student-name-alt {
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.teacher-dashboard .score-badge-alt {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.teacher-dashboard .score-badge-alt.excellent {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.teacher-dashboard .score-badge-alt.good {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.teacher-dashboard .score-badge-alt.average {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.teacher-dashboard .score-badge-alt.poor {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.teacher-dashboard .table-row-alt:hover {
+    background-color: #f8fafc;
+}
+
+.teacher-dashboard .table-row-alt:not(:last-child) {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .teacher-dashboard .table-header-alt,
+    .teacher-dashboard .table-row-alt {
+        grid-template-columns: 1fr 1fr; /* Simplify layout for smaller screens */
+        gap: 0.5rem;
+    }
+
+    .teacher-dashboard .table-cell-alt:nth-child(3),
+    .teacher-dashboard .table-cell-alt:nth-child(5) {
+        display: none; /* Hide less critical columns on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .teacher-dashboard .table-header-alt,
+    .teacher-dashboard .table-row-alt {
+        grid-template-columns: 1fr; /* Stack columns on very small screens */
+    }
+
+    .teacher-dashboard .table-cell-alt {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    /* No specific changes needed for this layout at this breakpoint */
+}
+
+@media (max-width: 768px) {
+    .teacher-dashboard .sidebar {
+        width: 220px;
+    }
+
+    .teacher-dashboard .content {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+        padding: 15px;
+    }
+
+    .teacher-dashboard .stats-section {
+        flex-direction: column;
+    }
+
+    .teacher-dashboard .stat-card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .teacher-dashboard .stat-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .teacher-dashboard .quizzes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .teacher-dashboard .results-content-alt {
+        padding: 1.5rem;
+    }
+
+    .teacher-dashboard .results-container-alt {
+        padding: 0 0.75rem; /* Adjusted padding for smaller screens */
+    }
+
+    .teacher-dashboard .results-header-card-alt {
+        padding: 1.25rem;
+    }
+
+    .teacher-dashboard .results-title-alt {
+        font-size: 1.5rem;
+    }
+
+    .teacher-dashboard .stats-grid-alt {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjusted for smaller screens */
+    }
+
+    .teacher-dashboard .chart-body-alt {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .teacher-dashboard {
+        flex-direction: column;
+    }
+
+    .teacher-dashboard .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+
+    .teacher-dashboard .sidebar nav ul li button {
+        padding: 8px;
+    }
+
+    .teacher-dashboard .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+        border-radius: 0;
+    }
+
+    .teacher-dashboard .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .teacher-dashboard .create-quiz-btn {
+        margin-top: 10px;
+    }
+
+    .teacher-dashboard .quizzes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .teacher-dashboard .results-content-alt {
+        padding: 1rem;
+    }
+
+    .teacher-dashboard .results-container-alt {
+        padding: 0 0.5rem; /* Further reduced padding for very small screens */
+    }
+
+    .teacher-dashboard .results-header-card-alt {
+        padding: 1rem;
+    }
+
+    .teacher-dashboard .results-title-alt {
+        font-size: 1.25rem;
+    }
+
+    .teacher-dashboard .results-form-alt {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .teacher-dashboard .quiz-code-wrapper-alt {
+        min-width: 100%;
+    }
+
+    .teacher-dashboard .fetch-btn-alt {
+        width: 100%;
+    }
+
+    .teacher-dashboard .stat-item-alt {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .teacher-dashboard .attempt-item-alt {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .teacher-dashboard .student-info-alt {
+        width: 100%;
+    }
+
+    .teacher-dashboard .score-badge-alt {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.teacher-dashboard .notifications-content {
+    background: white;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+}
+
+.teacher-dashboard .notifications-content h2 {
+    position: relative;
+    color: #ffffff;
+    padding: 0.5rem;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(90, 103, 216, 0.2);
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+.teacher-dashboard .notifications-list {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.teacher-dashboard .notification-item {
+    background: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.teacher-dashboard .notification-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.teacher-dashboard .notification-item.unread {
+    background: #f0f7ff;
+    border-color: #bfdbfe;
+}
+
+.teacher-dashboard .notification-item.unread::before {
+    content: '';
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    width: 4px;
+    height: 4px;
+    background: #3b82f6;
+    border-radius: 50%;
+}
+
+.teacher-dashboard .notification-icon {
+    width: 28px;
+    height: 28px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f46e5;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.teacher-dashboard .notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.teacher-dashboard .notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.teacher-dashboard .notification-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.teacher-dashboard .notification-time {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.teacher-dashboard .notification-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.teacher-dashboard .student-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.teacher-dashboard .student-avatar {
+    width: 24px;
+    height: 24px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+.teacher-dashboard .student-name {
+    font-size: 0.875rem;
+    color: #475569;
+}
+
+.teacher-dashboard .quiz-code-badge {
+    background: #f1f5f9;
+    color: #64748b;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.teacher-dashboard .notification-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.teacher-dashboard .password-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.teacher-dashboard .password-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.teacher-dashboard .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.teacher-dashboard .approve-btn,
+.teacher-dashboard .decline-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.teacher-dashboard .approve-btn {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.teacher-dashboard .approve-btn:hover {
+    background: #bbf7d0;
+}
+
+.teacher-dashboard .decline-btn {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.teacher-dashboard .decline-btn:hover {
+    background: #fecaca;
+}
+
+@media (max-width: 768px) {
+    .teacher-dashboard .notification-item {
+        flex-direction: column;
+    }
+
+    .teacher-dashboard .notification-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .teacher-dashboard .action-buttons {
+        width: 100%;
+    }
+
+    .teacher-dashboard .approve-btn,
+    .teacher-dashboard .decline-btn {
+        flex: 1;
+    }
+}
+
+/* Settings Styles */
+.teacher-dashboard .settings-container {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+.teacher-dashboard .settings-container h2 {
+    position: relative;
+    color: #ffffff;
+    padding: 1rem;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(90, 103, 216, 0.2);
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+.teacher-dashboard .settings-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.teacher-dashboard .settings-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.teacher-dashboard .settings-header p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+}
+
+.teacher-dashboard .settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.teacher-dashboard .settings-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.teacher-dashboard .settings-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--card-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.teacher-dashboard .settings-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--card-color);
+}
+
+.teacher-dashboard .settings-card:hover::before {
+    opacity: 1;
+}
+
+.teacher-dashboard .settings-card.active {
+    background: linear-gradient(135deg, rgba(var(--card-color-rgb), 0.1) 0%, rgba(var(--card-color-rgb), 0.05) 100%);
+    border-color: var(--card-color);
+}
+
+.teacher-dashboard .card-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--card-color) 0%, color-mix(in srgb, var(--card-color) 70%, white) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.teacher-dashboard .settings-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.teacher-dashboard .card-content {
+    flex: 1;
+}
+
+.teacher-dashboard .card-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+.teacher-dashboard .card-content p {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.teacher-dashboard .card-arrow {
+    font-size: 1.5rem;
+    color: var(--card-color);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .settings-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.teacher-dashboard .settings-panel {
+    background: white;
+    margin: 0 2rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.teacher-dashboard .panel-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.teacher-dashboard .panel-header h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.teacher-dashboard .close-panel {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    padding: 0.2rem 0.5rem;
+    line-height: 1;
+}
+
+.teacher-dashboard .close-panel:hover {
+    opacity: 1;
+}
+
+.teacher-dashboard .panel-content {
+    padding: 2rem;
+}
+
+.teacher-dashboard .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.teacher-dashboard .input-group label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.5rem;
+}
+
+.teacher-dashboard .input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .input-group input:focus {
+    outline: none;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.teacher-dashboard .update-password-btn,
+.teacher-dashboard .update-profile-btn {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.teacher-dashboard .update-password-btn:hover,
+.teacher-dashboard .update-profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.teacher-dashboard .update-password-btn:disabled,
+.teacher-dashboard .update-profile-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.teacher-dashboard .settings-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: center;
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .teacher-dashboard .settings-grid {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+
+    .teacher-dashboard .settings-panel {
+        margin: 0 1.5rem 1.5rem;
+    }
+
+    .teacher-dashboard .settings-card {
+        padding: 1.2rem;
+    }
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    position: relative;
+    padding-right: 2rem;
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt:hover {
+    color: #1e293b;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt::after {
+    content: '⇅';
+    position: absolute;
+    right: 0.75rem;
+    opacity: 0.3;
+    transition: all 0.2s ease;
+    font-size: 1.1em;
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt:hover::after {
+    opacity: 0.7;
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt.active {
+    color: #4f46e5;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt.active.asc-sort::after {
+    content: '↑';
+    opacity: 1;
+    color: #4f46e5;
+    transform: scale(1.2);
+}
+
+.teacher-dashboard .table-header-alt .table-cell-alt.active.desc-sort::after {
+    content: '↓';
+    opacity: 1;
+    color: #4f46e5;
+    transform: scale(1.2);
+}

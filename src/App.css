@@ -1,0 +1,483 @@
+/* App.css */
+
+:root {
+  --header-height: 50px;
+  --container-padding: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+.layout-container:has(> header) {
+  padding-top: var(--header-height);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+/* Spacing utilities */
+.p-4 {
+  padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
+}
+
+/* Grid utilities */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Animation utilities */
+.transition {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .sm\:hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) {
+  .sm\:block {
+    display: block;
+  }
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* src/App.css */
+
+/* Fade In Animation */
+.fadeIn {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+/* Fade Out Animation */
+.fadeOut {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+/* Keyframes for fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for fade-out */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Dashboard card styles */
+.stat-card,
+.quiz-card,
+.notification-item,
+.result-card {
+  text-align: center;
+}
+
+.stat-card *,
+.quiz-card *,
+.notification-item *,
+.result-card * {
+  text-align: center;
+}
+
+/* Ensure text elements in cards are centered */
+.stat-card h4,
+.stat-card p,
+.quiz-card h4,
+.quiz-card p,
+.notification-item p,
+.notification-item span,
+.result-card h4,
+.result-card p {
+  text-align: center;
+}
+
+/* Center headers in specific pages */
+.content h2,
+.results-content h2,
+.notifications-content h2 {
+  text-align: center;
+  width: 100%;
+}
+
+/* Reset all other elements to original state */
+.sidebar,
+.content,
+.dashboard-header,
+.quiz-list,
+.stats-grid,
+.notifications-list,
+.quiz-form-container,
+.quiz-edit-form,
+.question-list,
+.options-list,
+.results-list,
+.retest-requests-list,
+.settings-container,
+.profile-container,
+.welcome-box,
+.notification-badge,
+.quiz-details,
+.quiz-stats,
+.quiz-actions,
+.quiz-form,
+.question-card,
+.option-card,
+.retest-request-card,
+.settings-form,
+.profile-form {
+  text-align: left;
+}
+
+.sidebar *,
+.content *,
+.dashboard-header *,
+.quiz-list *,
+.stats-grid *,
+.notifications-list *,
+.quiz-form-container *,
+.quiz-edit-form *,
+.question-list *,
+.options-list *,
+.results-list *,
+.retest-requests-list *,
+.settings-container *,
+.profile-container *,
+.welcome-box *,
+.notification-badge *,
+.quiz-details *,
+.quiz-stats *,
+.quiz-actions *,
+.quiz-form *,
+.question-card *,
+.option-card *,
+.retest-request-card *,
+.settings-form *,
+.profile-form * {
+  text-align: left;
+}
+
+/* Reset button styles */
+button {
+  text-align: left;
+  display: inline-block;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* Reset header styles */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+  width: auto;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 0.75rem;
+  }
+
+  .layout-container {
+    padding-top: var(--header-height);
+  }
+
+  .main-content {
+    padding: var(--container-padding);
+  }
+
+  .card {
+    padding: 1em;
+  }
+
+  .grid {
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card h4 {
+    font-size: 1rem;
+  }
+
+  .content h2 {
+    font-size: 1.5rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.active {
+    transform: translateY(0);
+  }
+
+  .sidebar * {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 0.5rem;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 0.75rem;
+  }
+
+  .content h2 {
+    font-size: 1.25rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    transform: translateX(100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
