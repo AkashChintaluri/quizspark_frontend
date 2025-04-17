@@ -4,7 +4,7 @@ import {
     useParams,
     useLocation
 } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import './StudentDashboard.css';
 import './TakeQuiz.css';
 import TeacherList from './TeacherList';
@@ -65,30 +65,13 @@ function StudentDashboard() {
 
     return (
         <div className="student-dashboard">
-            {currentUser ? (
-                <>
-                    <Sidebar
-                        activeTab={activeTab}
-                        setActiveTab={setActiveTab}
-                        currentUser={currentUser}
-                        handleTabChange={handleTabChange}
-                        navigate={navigate}
-                    />
-                    <Content
-                        activeTab={activeTab}
-                        setActiveTab={setActiveTab}
-                        currentUser={currentUser}
-                        location={location}
-                    />
-                </>
-            ) : (
-                <div className="auth-message">Session expired. Redirecting to login...</div>
-            )}
+            <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} currentUser={currentUser} />
+            <Content activeTab={activeTab} currentUser={currentUser} setActiveTab={setActiveTab} location={location} />
         </div>
     );
 }
 
-function Sidebar({ activeTab, currentUser, handleTabChange }) {
+function Sidebar({ activeTab, setActiveTab, currentUser }) {
     return (
         <div className="sidebar">
             <h2>Student Dashboard</h2>
@@ -97,13 +80,14 @@ function Sidebar({ activeTab, currentUser, handleTabChange }) {
                     <p>Welcome, {currentUser.username}!</p>
                 </div>
             )}
+
             <nav>
                 <ul>
                     {['Home', 'Take Quiz', 'Results', 'Leaderboard', 'Settings'].map((tab) => (
                         <li key={tab}>
                             <button
                                 className={activeTab === tab.toLowerCase() ? 'active' : ''}
-                                onClick={() => handleTabChange(tab)}
+                                onClick={() => setActiveTab(tab)}
                             >
                                 {tab}
                             </button>
@@ -115,7 +99,7 @@ function Sidebar({ activeTab, currentUser, handleTabChange }) {
     );
 }
 
-function Content({ activeTab, setActiveTab, currentUser, location }) {
+function Content({ activeTab, currentUser, setActiveTab, location }) {
     const { pathname } = location;
 
     if (pathname.includes('/take-quiz/')) {
@@ -163,19 +147,15 @@ function HomeContent({ currentUser, setActiveTab }) {
                 if (!currentUser?.id) {
                     throw new Error('Invalid user session');
                 }
-                const apiUrl = import.meta.env.VITE_API_URL;
-                if (!apiUrl) {
-                    throw new Error('API URL is not defined in environment variables');
-                }
 
                 const endpoints = [
-                    `${apiUrl}/api/upcoming-quizzes/${currentUser.id}`,
-                    `${apiUrl}/api/user-stats/${currentUser.id}`,
-                    `${apiUrl}/api/attempted-quizzes/${currentUser.id}`,
+                    `/api/upcoming-quizzes/${currentUser.id}`,
+                    `/api/user-stats/${currentUser.id}`,
+                    `/api/attempted-quizzes/${currentUser.id}`,
                 ];
 
                 const [upcomingResponse, statsResponse, attemptedResponse] = await Promise.all(
-                    endpoints.map((url) => axios.get(url))
+                    endpoints.map((url) => axiosInstance.get(url))
                 );
 
                 setUpcomingQuizzes(upcomingResponse.data);
@@ -215,83 +195,56 @@ function HomeContent({ currentUser, setActiveTab }) {
     }
 
     return (
-        <div className="content home-content">
-            {error ? (
-                <div className="error-message">{error}</div>
-            ) : (
-                <>
-                    <div className="stats-section">
-                        <h3>Your Statistics</h3>
-                        <div className="stats-grid">
-                            <div className="stat-card">
-                                <h4>Total Attempts</h4>
-                                <p>{stats.total_attempts}</p>
-                            </div>
-                            <div className="stat-card">
-                                <h4>Average Score</h4>
-                                <p>{(stats.average_score || 0).toFixed(1)}%</p>
-                            </div>
-                            <div className="stat-card">
-                                <h4>Highest Score</h4>
-                                <p>{stats.highest_score}% ({stats.highest_quiz_name})</p>
-                            </div>
-                        </div>
-                    </div>
+        <div className="content">
+            <div className="dashboard-stats">
+                <div className="stat-card">
+                    <h3>Total Attempts</h3>
+                    <p>{stats.total_attempts}</p>
+                </div>
+                <div className="stat-card">
+                    <h3>Average Score</h3>
+                    <p>{stats.average_score}%</p>
+                </div>
+                <div className="stat-card">
+                    <h3>Highest Score</h3>
+                    <p>{stats.highest_score}%</p>
+                    <small>{stats.highest_quiz_name}</small>
+                </div>
+            </div>
 
-                    <div className="upcoming-quizzes">
-                        <h3>Upcoming Quizzes</h3>
-                        {upcomingQuizzes.length === 0 ? (
-                            <p>No upcoming quizzes available.</p>
-                        ) : (
-                            <div className="quiz-list">
-                                {upcomingQuizzes.map((quiz) => (
-                                    <div
-                                        key={quiz.quiz_id}
-                                        className="quiz-card clickable"
-                                        onClick={() => handleUpcomingQuizClick(quiz.quiz_code)}
-                                    >
-                                        <h4>{quiz.quiz_name}</h4>
-                                        <p>Code: {quiz.quiz_code}</p>
-                                        <p>Teacher: {quiz.teacher_name}</p>
-                                        <p>Due Date: {new Date(quiz.due_date).toLocaleDateString()}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+            <div className="quizzes-section">
+                <div className="upcoming-quizzes">
+                    <h3>Upcoming Quizzes</h3>
+                    {upcomingQuizzes.length > 0 ? (
+                        <ul>
+                            {upcomingQuizzes.map((quiz) => (
+                                <li key={quiz.quiz_code} onClick={() => handleUpcomingQuizClick(quiz.quiz_code)}>
+                                    {quiz.quiz_name}
+                                    <span>Due: {new Date(quiz.due_date).toLocaleString()}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No upcoming quizzes</p>
+                    )}
+                </div>
 
-                    <div className="attempted-quizzes">
-                        <h3>Attempted Quizzes</h3>
-                        {attemptedQuizzes.length === 0 ? (
-                            <p>You have not attempted any quizzes yet.</p>
-                        ) : (
-                            <div className="quiz-list">
-                                {attemptedQuizzes.map((quiz) => (
-                                    <div
-                                        key={quiz.quiz_id}
-                                        className="quiz-card clickable"
-                                        onClick={() => handleAttemptedQuizClick(quiz.quiz_code)}
-                                    >
-                                        <h4>{quiz.quiz_name}</h4>
-                                        <p>Code: {quiz.quiz_code}</p>
-                                        <p>Teacher: {quiz.teacher_name}</p>
-                                        <p>Attempt Date: {quiz.attempt_date ? new Date(quiz.attempt_date).toLocaleString('en-US', {
-                                            year: 'numeric',
-                                            month: 'short',
-                                            day: 'numeric',
-                                            hour: '2-digit',
-                                            minute: '2-digit',
-                                            hour12: true
-                                        }) : 'N/A'}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    <TeacherList studentId={currentUser?.id} />
-                </>
-            )}
+                <div className="attempted-quizzes">
+                    <h3>Attempted Quizzes</h3>
+                    {attemptedQuizzes.length > 0 ? (
+                        <ul>
+                            {attemptedQuizzes.map((quiz) => (
+                                <li key={quiz.quiz_code} onClick={() => handleAttemptedQuizClick(quiz.quiz_code)}>
+                                    {quiz.quiz_name}
+                                    <span>Score: {quiz.score}%</span>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No attempted quizzes</p>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }
@@ -324,13 +277,9 @@ function TakeQuizContent({ currentUser }) {
             if (!currentUser?.id) {
                 throw new Error('User not authenticated');
             }
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
 
-            const attemptCheckResponse = await axios.get(
-                `${apiUrl}/api/check-quiz-attempt/${code}/${currentUser.id}`
+            const attemptCheckResponse = await axiosInstance.get(
+                `/api/check-quiz-attempt/${code}/${currentUser.id}`
             );
             if (attemptCheckResponse.data.hasAttempted) {
                 setError(attemptCheckResponse.data.message);
@@ -338,7 +287,7 @@ function TakeQuizContent({ currentUser }) {
                 return;
             }
 
-            const response = await axios.get(`${apiUrl}/api/quizzes/${code}`);
+            const response = await axiosInstance.get(`/api/quizzes/${code}`);
             setQuizData(response.data);
             setShowQuizCodeInput(false);
         } catch (err) {
@@ -370,12 +319,8 @@ function TakeQuizContent({ currentUser }) {
             if (!currentUser?.id) {
                 throw new Error('User not authenticated');
             }
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
 
-            const response = await axios.post(`${apiUrl}/api/submit-quiz`, {
+            const response = await axiosInstance.post('/api/submit-quiz', {
                 quiz_code: quizCode,
                 user_id: currentUser.id,
                 answers: selectedAnswers,
@@ -487,11 +432,7 @@ function ResultsContent({ currentUser, setActiveTab }) {
             setLoading(true);
             setError('');
             try {
-                const apiUrl = import.meta.env.VITE_API_URL;
-                if (!apiUrl) {
-                    throw new Error('API URL is not defined in environment variables');
-                }
-                const response = await axios.get(`${apiUrl}/api/quiz-result/${code}/${currentUser.id}`);
+                const response = await axiosInstance.get(`/api/quiz-result/${code}/${currentUser.id}`);
                 if (response.status !== 200) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -519,11 +460,7 @@ function ResultsContent({ currentUser, setActiveTab }) {
     const handleCheckLeaderboard = async () => {
         if (quizResult?.quiz_id) {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL;
-                if (!apiUrl) {
-                    throw new Error('API URL is not defined in environment variables');
-                }
-                const response = await axios.get(`${apiUrl}/api/quizzes/id/${quizResult.quiz_id}`);
+                const response = await axiosInstance.get(`/api/quizzes/id/${quizResult.quiz_id}`);
                 if (response.data?.quiz_code) {
                     setActiveTab('leaderboard');
                     navigate(`/student-dashboard/leaderboard/${response.data.quiz_code}`, {
@@ -540,11 +477,7 @@ function ResultsContent({ currentUser, setActiveTab }) {
         setRetestLoading(true);
         setRetestMessage('');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
-            const response = await axios.post(`${apiUrl}/api/retest-requests`, {
+            const response = await axiosInstance.post('/api/retest-requests', {
                 student_id: currentUser.id,
                 quiz_id: quizResult.quiz_id,
                 attempt_id: attemptId
@@ -668,11 +601,7 @@ function LeaderboardContent({ currentUser }) {
         setLoading(true);
         setError('');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
-            const response = await axios.get(`${apiUrl}/api/quiz-results/${code}/leaderboard`);
+            const response = await axiosInstance.get(`/api/quiz-results/${code}/leaderboard`);
             if (response.status !== 200) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -804,11 +733,7 @@ function SettingsContent({ currentUser }) {
         setIsLoading(true);
         setMessage('');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
-            const response = await axios.post(`${apiUrl}/change-password`, {
+            const response = await axiosInstance.post('/change-password', {
                 ...formData,
                 username: currentUser.username,
                 userType: 'student',
@@ -836,11 +761,7 @@ function SettingsContent({ currentUser }) {
         setIsLoading(true);
         setMessage('');
         try {
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
-            const response = await axios.put(`${apiUrl}/api/students/${currentUser.id}`, {
+            const response = await axiosInstance.put(`/api/students/${currentUser.id}`, {
                 ...profileData
             });
 

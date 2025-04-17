@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import './TeacherList.css';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 function TeacherList({ studentId }) {
     const [teachers, setTeachers] = useState([]);
@@ -19,8 +17,8 @@ function TeacherList({ studentId }) {
     const fetchTeachers = async () => {
         try {
             const [teachersRes, subsRes] = await Promise.all([
-                axios.get(`${API_BASE_URL}/api/teachers`),
-                axios.get(`${API_BASE_URL}/api/subscriptions/${studentId}`)
+                axiosInstance.get('/api/teachers'),
+                axiosInstance.get(`/api/subscriptions/${studentId}`)
             ]);
             
             if (Array.isArray(teachersRes.data)) {
@@ -48,7 +46,7 @@ function TeacherList({ studentId }) {
 
     const handleSubscribe = async (teacherId) => {
         try {
-            await axios.post(`${API_BASE_URL}/api/subscribe`, {
+            await axiosInstance.post('/api/subscribe', {
                 student_id: studentId,
                 teacher_id: teacherId
             });
@@ -60,7 +58,7 @@ function TeacherList({ studentId }) {
 
     const handleUnsubscribe = async (teacherId) => {
         try {
-            await axios.post(`${API_BASE_URL}/api/unsubscribe`, {
+            await axiosInstance.post('/api/unsubscribe', {
                 student_id: studentId,
                 teacher_id: teacherId
             });

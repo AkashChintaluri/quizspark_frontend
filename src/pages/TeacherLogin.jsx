@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import './Login.css';
 
 function TeacherLogin() {
@@ -31,11 +31,7 @@ function TeacherLogin() {
         setErrorMessage('');
 
         try {
-            const apiUrl = import.meta.env.VITE_API_URL;
-            if (!apiUrl) {
-                throw new Error('API URL is not defined in environment variables');
-            }
-            const response = await axios.post(`${apiUrl}/login`, {
+            const response = await axiosInstance.post('/login', {
                 ...formData,
                 userType: 'teacher',
             });
