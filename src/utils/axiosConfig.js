@@ -2,10 +2,6 @@ import axios from 'axios';
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
-    // Don't reject self-signed certificates
-    httpsAgent: new (require('https').Agent)({
-        rejectUnauthorized: false
-    }),
     // Set default timeout
     timeout: 10000,
     // Set default headers
