@@ -14,23 +14,10 @@ export default defineConfig({
         main: './index.html'
       },
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('@chakra-ui') || id.includes('@emotion') || id.includes('framer-motion') || 
-                id.includes('bootstrap') || id.includes('react-bootstrap')) {
-              return 'ui-vendor';
-            }
-            if (id.includes('chart.js') || id.includes('react-chartjs-2')) {
-              return 'chart-vendor';
-            }
-            if (id.includes('axios') || id.includes('@supabase')) {
-              return 'utils-vendor';
-            }
-            return 'vendor';
-          }
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'chakra-vendor': ['@chakra-ui/react', '@emotion/react', '@emotion/styled', 'framer-motion'],
+          'chart-vendor': ['chart.js', 'react-chartjs-2']
         }
       }
     }
@@ -41,5 +28,8 @@ export default defineConfig({
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
     }
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@chakra-ui/react', '@emotion/react', '@emotion/styled', 'framer-motion', 'chart.js', 'react-chartjs-2']
   }
 });
